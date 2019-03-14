@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Meus Gastos</string>
+    <string name="form_valor">Informe um valor</string>
+    <string name="form_data">Informe uma data</string>
+    <string name="form_descricao">Informe a descrição</string>
+
+    <string-array name="lista_categorias">
+        <item>Alimentação</item>
+        <item>Transporte</item>
+        <item>Pessoais</item>
+        <item>Moradia</item>
+        <item>Saúde</item>
+        <item>Lazer</item>
+    </string-array>
+</resources>
