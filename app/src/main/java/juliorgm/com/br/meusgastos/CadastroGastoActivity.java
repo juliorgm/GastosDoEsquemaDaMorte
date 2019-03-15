@@ -7,7 +7,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import juliorgm.com.br.meusgastos.dao.GastoDAO;
 import juliorgm.com.br.meusgastos.model.Gasto;
 
 public class CadastroGastoActivity extends AppCompatActivity {
@@ -39,6 +41,22 @@ public class CadastroGastoActivity extends AppCompatActivity {
                 String categoria = spinnerCategoria.getSelectedItem().toString();
 
                 Gasto gasto = new Gasto(valor, data,descricao,categoria );
+                GastoDAO dao = new GastoDAO(CadastroGastoActivity.this);
+
+                long resultado = dao.inserir(gasto);
+
+                if (resultado == -1){
+                    Toast.makeText(CadastroGastoActivity.this,
+                            "Houve um erro ao realizar a inserção",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(CadastroGastoActivity.this,
+                            "Gasto inserido com sucesso!",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                /// mandar esse gasto para o banco
             }
         });
     }
