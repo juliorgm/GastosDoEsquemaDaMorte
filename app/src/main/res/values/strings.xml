@@ -3,6 +3,10 @@
     <string name="form_valor">Informe um valor</string>
     <string name="form_data">Informe uma data</string>
     <string name="form_descricao">Informe a descrição</string>
+    <string name="mensagem_erro">Houve um erro ao realizar a inserção</string>
+    <string name="messagem_deletar">Você tem certeza que deseja realizar essa operação</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
     <string-array name="lista_categorias">
         <item>Alimentação</item>

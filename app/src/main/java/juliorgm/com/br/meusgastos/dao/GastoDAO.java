@@ -69,12 +69,13 @@ public class GastoDAO extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql,null);
 
         while (cursor.moveToNext()){
+            int id =  cursor.getInt(cursor.getColumnIndex(GastoEntrada.COLUMN_ID));
             double valor =  cursor.getDouble(cursor.getColumnIndex(GastoEntrada.COLUMN_VALOR));
             String data =  cursor.getString(cursor.getColumnIndex(GastoEntrada.COLUMN_DATA));
             String descricao =  cursor.getString(cursor.getColumnIndex(GastoEntrada.COLUMN_CATEGORIA));
             String categoria =  cursor.getString(cursor.getColumnIndex(GastoEntrada.COLUMN_CATEGORIA));
 
-            listaDeGastos.add(new Gasto(valor,data,descricao,categoria));
+            listaDeGastos.add(new Gasto(id, valor,data,descricao,categoria));
         }
 
         return listaDeGastos;

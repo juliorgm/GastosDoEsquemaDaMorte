@@ -8,6 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Util {
+
+    public static String EDITAR_GASTO ="EDITAR";
+
     public static String formataData(String data) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return dateFormat.format(data);
@@ -20,6 +23,10 @@ public class Util {
 
     public static void messagem(Context context, String mensagem) {
         Toast.makeText(context, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void messagemFromResource(Context context, int resource) {
+        Toast.makeText(context, resource, Toast.LENGTH_SHORT).show();
     }
 
     public static String formataDataBR(String data) {

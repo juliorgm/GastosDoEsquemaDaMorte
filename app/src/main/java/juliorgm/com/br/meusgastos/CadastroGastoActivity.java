@@ -10,10 +10,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import juliorgm.com.br.meusgastos.dao.GastoDAO;
+import juliorgm.com.br.meusgastos.helper.Util;
 import juliorgm.com.br.meusgastos.model.Gasto;
 
 public class CadastroGastoActivity extends AppCompatActivity {
 
+    public static final int RESULTADO_ERRO = -1;
     private EditText campoValor;
     private EditText campoData;
     private EditText campoDescricao;
@@ -40,22 +42,18 @@ public class CadastroGastoActivity extends AppCompatActivity {
                 String descricao = campoDescricao.getText().toString();
                 String categoria = spinnerCategoria.getSelectedItem().toString();
 
-                Gasto gasto = new Gasto(valor, data,descricao,categoria );
+                // E se os campos estiverem vazios?
+                Gasto gasto = new Gasto(valor, data,descricao,categoria);
                 GastoDAO dao = new GastoDAO(CadastroGastoActivity.this);
 
                 long resultado = dao.inserir(gasto);
 
-                if (resultado == -1){
-                    Toast.makeText(CadastroGastoActivity.this,
-                            "Houve um erro ao realizar a inserção",
-                            Toast.LENGTH_SHORT).show();
+                if (resultado == RESULTADO_ERRO){
+                    Util.messagemFromResource(CadastroGastoActivity.this,R.string.mensagem_erro);
                 }else {
-                    Toast.makeText(CadastroGastoActivity.this,
-                            "Gasto inserido com sucesso!",
-                            Toast.LENGTH_SHORT).show();
+                    Util.messagem(CadastroGastoActivity.this,"Gasto inserido com sucesso!");
                     finish();
                 }
-
             }
         });
     }
@@ -65,7 +63,7 @@ public class CadastroGastoActivity extends AppCompatActivity {
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.lista_categorias,
-                android.R.layout.simple_spinner_item);
+                R.layout.layout_spinner);
 
         spinnerCategoria.setAdapter(adapter);
     }

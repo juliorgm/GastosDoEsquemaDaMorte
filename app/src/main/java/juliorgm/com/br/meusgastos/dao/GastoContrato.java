@@ -16,7 +16,6 @@ public final class GastoContrato {
         public static final String COLUMN_DATA = "data";
         public static final String COLUMN_DESCRICAO = "descricao";
         public static final String COLUMN_CATEGORIA = "categoria";
-
     }
 
 

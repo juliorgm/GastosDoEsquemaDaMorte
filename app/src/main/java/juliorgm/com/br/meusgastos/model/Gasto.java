@@ -1,6 +1,8 @@
 package juliorgm.com.br.meusgastos.model;
 
-public class Gasto {
+import java.io.Serializable;
+
+public class Gasto implements Serializable {
     private int idGasto;
     private double valor;
     private String data;

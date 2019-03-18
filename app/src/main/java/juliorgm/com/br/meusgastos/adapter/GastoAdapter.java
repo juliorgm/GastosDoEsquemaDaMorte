@@ -4,16 +4,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
+import juliorgm.com.br.meusgastos.EdicaoGastosActivity;
 import juliorgm.com.br.meusgastos.R;
 import juliorgm.com.br.meusgastos.dao.GastoDAO;
 import juliorgm.com.br.meusgastos.helper.Util;
@@ -55,18 +58,27 @@ public class GastoAdapter extends BaseAdapter {
         TextView textDescricao = view.findViewById(R.id.item_gasto_text_descricao);
         FloatingActionButton fabDeletar = view.findViewById(R.id.item_fab_deletar);
 
-        final Gasto gasto = (Gasto) getItem(position);
+        final Gasto gasto = listaDeGastos.get(position);
 
         textValor.setText(gasto.getValorToString());
         textData.setText(gasto.getData());
         textDescricao.setText(gasto.getDescricao());
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, EdicaoGastosActivity.class);
+                intent.putExtra(Util.EDITAR_GASTO,gasto);
+                activity.startActivity(intent);
+            }
+        });
+
         fabDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder =  new AlertDialog.Builder(activity);
-                builder.setMessage("Você tem certeza que deseja realizar essa operação")
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                builder.setMessage(R.string.messagem_deletar)
+                        .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 GastoDAO dao = new GastoDAO(activity);
@@ -76,11 +88,11 @@ public class GastoAdapter extends BaseAdapter {
                                     notifyDataSetChanged();
                                 }
                             }
-                        }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
+                        }).setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
                 });
                 builder.show();
             }
