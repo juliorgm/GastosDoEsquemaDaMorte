@@ -22,7 +22,7 @@ public class GastoDAO extends SQLiteOpenHelper {
                     + "(" + GastoEntrada.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT"
                     + "," + GastoEntrada.COLUMN_VALOR + " DOUBLE NOT NULL"
                     + "," + GastoEntrada.COLUMN_DATA + " TEXT NOT NULL"
-                    + "," + GastoEntrada.COLUMN_DESCRICAO + "TEXT NOT NULL"
+                    + "," + GastoEntrada.COLUMN_DESCRICAO + " TEXT NOT NULL"
                     + "," + GastoEntrada.COLUMN_CATEGORIA + ")";
 
     private static final String SQL_DROP_TABLE_GASTO = "DROP TABLE " + GastoEntrada.TABLE_NAME;
@@ -44,16 +44,21 @@ public class GastoDAO extends SQLiteOpenHelper {
     public long inserir(Gasto gasto){
         SQLiteDatabase db = getWritableDatabase();
 
-        ContentValues dados = new ContentValues();
-        dados.put(GastoEntrada.COLUMN_VALOR,gasto.getValor());
-        dados.put(GastoEntrada.COLUMN_DATA,gasto.getData());
-        dados.put(GastoEntrada.COLUMN_DESCRICAO,gasto.getDescricao());
-        dados.put(GastoEntrada.COLUMN_CATEGORIA,gasto.getCategoria());
+        ContentValues dados = getContentValues(gasto);
 
         long resultado = db.insert(GastoEntrada.TABLE_NAME,null, dados);
         db.close();
 
         return resultado;
+    }
+
+    private ContentValues getContentValues(Gasto gasto) {
+        ContentValues dados = new ContentValues();
+        dados.put(GastoEntrada.COLUMN_VALOR,gasto.getValor());
+        dados.put(GastoEntrada.COLUMN_DATA,gasto.getData());
+        dados.put(GastoEntrada.COLUMN_DESCRICAO,gasto.getDescricao());
+        dados.put(GastoEntrada.COLUMN_CATEGORIA,gasto.getCategoria());
+        return dados;
     }
 
     public List<Gasto> listarTodosOsGastos(){
@@ -73,5 +78,43 @@ public class GastoDAO extends SQLiteOpenHelper {
         }
 
         return listaDeGastos;
+    }
+
+    public double getValorTotalDeGastos(){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sql = "SELECT SUM(" + GastoEntrada.COLUMN_VALOR + ") AS " + GastoEntrada.COLUMN_VALOR + " FROM " + GastoEntrada.TABLE_NAME;
+
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToNext();
+
+        double valorTotal = cursor.getDouble(cursor.getColumnIndexOrThrow(GastoEntrada.COLUMN_VALOR));
+        return valorTotal;
+    }
+
+
+    public int editar(Gasto gasto){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues dados = getContentValues(gasto);
+
+        String args[] = {String.valueOf(gasto.getIdGasto())};
+        String selection = GastoEntrada.COLUMN_ID + "= ?";
+
+        int resultado = db.update(GastoEntrada.TABLE_NAME,dados, selection,args);
+        db.close();
+
+        return resultado;
+    }
+
+    public int delete(long id) {
+        SQLiteDatabase db = getWritableDatabase();
+        String args[] = {String.valueOf(id)};
+        String selection = GastoEntrada.COLUMN_ID + "= ?";
+        int resultado = db.delete(GastoEntrada.TABLE_NAME, selection, args);
+
+        db.close();
+
+        return resultado;
     }
 }

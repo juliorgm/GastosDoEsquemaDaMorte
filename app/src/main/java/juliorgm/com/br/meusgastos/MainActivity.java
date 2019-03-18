@@ -8,10 +8,17 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.List;
+
+import juliorgm.com.br.meusgastos.adapter.GastoAdapter;
+import juliorgm.com.br.meusgastos.dao.GastoDAO;
+import juliorgm.com.br.meusgastos.model.Gasto;
+
 public class MainActivity extends AppCompatActivity {
 
     private ListView listViewGastos;
     private FloatingActionButton fabAdicionarGasto;
+    private GastoDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +28,11 @@ public class MainActivity extends AppCompatActivity {
         listViewGastos = findViewById(R.id.listview_gastos);
         fabAdicionarGasto = findViewById(R.id.fab_cadastrar_gasto);
 
-        String [] listaTeste = {"João","Pedro","Maria"};
+        dao = new GastoDAO(this);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                listaTeste);
+       
 
-        listViewGastos.setAdapter(adapter);
+        
 
         fabAdicionarGasto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,5 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Gasto> listaDeGastos = dao.listarTodosOsGastos();
+        double totalDeGastos = dao.getValorTotalDeGastos();
+
+        GastoAdapter adapter = new GastoAdapter(this,listaDeGastos);
+        listViewGastos.setAdapter(adapter);
     }
 }

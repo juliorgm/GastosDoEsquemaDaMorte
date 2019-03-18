@@ -56,7 +56,6 @@ public class CadastroGastoActivity extends AppCompatActivity {
                     finish();
                 }
 
-                /// mandar esse gasto para o banco
             }
         });
     }

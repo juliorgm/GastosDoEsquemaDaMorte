@@ -30,6 +30,10 @@ public class Gasto {
         return valor;
     }
 
+    public String getValorToString() {
+        return String.valueOf(valor);
+    }
+
     public String getData() {
         return data;
     }
