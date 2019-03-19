@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listViewGastos;
     private FloatingActionButton fabAdicionarGasto;
+    private TextView textSomaTotal;
     private GastoDAO dao;
 
     @Override
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         listViewGastos = findViewById(R.id.listview_gastos);
         fabAdicionarGasto = findViewById(R.id.fab_cadastrar_gasto);
+        textSomaTotal = findViewById(R.id.textSomaTotal);
 
         dao = new GastoDAO(this);
 
@@ -56,5 +59,21 @@ public class MainActivity extends AppCompatActivity {
                 Util.messagem(MainActivity.this, "teste");
             }
         });
+
+        atualizaTotal();
+    }
+
+    private void atualizaTotal(){
+        double total = dao.getValorTotalDeGastos();
+
+        textSomaTotal.setText(String.valueOf(total));
+    }
+
+    private double atualizaTotalVersao2(List<Gasto> listaDeGastos){
+        double valor = 0;
+        for (Gasto gasto:listaDeGastos) {
+            valor += gasto.getValor();
+        }
+        return valor;
     }
 }

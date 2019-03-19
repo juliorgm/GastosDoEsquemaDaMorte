@@ -72,7 +72,7 @@ public class GastoDAO extends SQLiteOpenHelper {
             int id =  cursor.getInt(cursor.getColumnIndex(GastoEntrada.COLUMN_ID));
             double valor =  cursor.getDouble(cursor.getColumnIndex(GastoEntrada.COLUMN_VALOR));
             String data =  cursor.getString(cursor.getColumnIndex(GastoEntrada.COLUMN_DATA));
-            String descricao =  cursor.getString(cursor.getColumnIndex(GastoEntrada.COLUMN_CATEGORIA));
+            String descricao =  cursor.getString(cursor.getColumnIndex(GastoEntrada.COLUMN_DESCRICAO));
             String categoria =  cursor.getString(cursor.getColumnIndex(GastoEntrada.COLUMN_CATEGORIA));
 
             listaDeGastos.add(new Gasto(id, valor,data,descricao,categoria));
@@ -83,6 +83,7 @@ public class GastoDAO extends SQLiteOpenHelper {
 
     public double getValorTotalDeGastos(){
         SQLiteDatabase db = getReadableDatabase();
+
 
         String sql = "SELECT SUM(" + GastoEntrada.COLUMN_VALOR + ") AS " + GastoEntrada.COLUMN_VALOR + " FROM " + GastoEntrada.TABLE_NAME;
 

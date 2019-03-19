@@ -9,7 +9,8 @@
     <string name="nao">Não</string>
     <string name="btn_salvar">Salvar</string>
     <string name="erro_objeto_edicao">Não foi possível recuperar o gasto para edição!</string>
-    <string name="operacao_sucesso">Operação realizada com sucesso!</string>
+    <string name="operacao_sucesso">Operação realizada com sucesso</string>
+    <string name="campo_vazio">O campo é obrigatório</string>
 
     <string-array name="lista_categorias">
         <item>Alimentação</item>
