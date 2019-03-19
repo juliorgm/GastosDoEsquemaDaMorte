@@ -3,9 +3,13 @@ package juliorgm.com.br.meusgastos.helper;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Util {
 
@@ -43,5 +47,11 @@ public class Util {
         }
 
         return outputFormat.format(date);
+    }
+
+    public static int pegaIndexSpinner(Context context,int resource,String textoIndex){
+        String [] arrayDeString = context.getResources().getStringArray(resource);
+        List<String> stringList = Arrays.asList(arrayDeString);
+        return stringList.indexOf(textoIndex);
     }
 }

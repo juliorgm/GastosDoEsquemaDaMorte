@@ -2,21 +2,18 @@ package juliorgm.com.br.meusgastos.adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
-import juliorgm.com.br.meusgastos.EdicaoGastosActivity;
+import juliorgm.com.br.meusgastos.EdicaoGastoActivity;
 import juliorgm.com.br.meusgastos.R;
 import juliorgm.com.br.meusgastos.dao.GastoDAO;
 import juliorgm.com.br.meusgastos.helper.Util;
@@ -67,7 +64,7 @@ public class GastoAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, EdicaoGastosActivity.class);
+                Intent intent = new Intent(activity, EdicaoGastoActivity.class);
                 intent.putExtra(Util.EDITAR_GASTO,gasto);
                 activity.startActivity(intent);
             }

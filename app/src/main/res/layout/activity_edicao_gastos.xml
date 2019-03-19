@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EdicaoGastosActivity">
+    tools:context=".EdicaoGastoActivity">
 
     <EditText
         android:id="@+id/edicao_edittext_valor"
@@ -15,7 +15,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:capitalize="words"
         android:ems="10"
+        android:hint="@string/form_valor"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,39 +29,42 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
+        android:hint="@string/form_data"
         android:inputType="date"
-        app:layout_constraintEnd_toEndOf="@+id/cadastro_edittext_valor"
-        app:layout_constraintStart_toStartOf="@+id/cadastro_edittext_valor"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_edittext_valor" />
+        app:layout_constraintEnd_toEndOf="@+id/edicao_edittext_valor"
+        app:layout_constraintStart_toStartOf="@+id/edicao_edittext_valor"
+        app:layout_constraintTop_toBottomOf="@+id/edicao_edittext_valor" />
 
     <EditText
         android:id="@+id/edicao_edittext_descricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:capitalize="words"
         android:ems="10"
+        android:hint="@string/form_descricao"
         android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="@+id/cadastro_edittext_data"
-        app:layout_constraintStart_toStartOf="@+id/cadastro_edittext_data"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_edittext_data" />
+        app:layout_constraintEnd_toEndOf="@+id/edicao_edittext_data"
+        app:layout_constraintStart_toStartOf="@+id/edicao_edittext_data"
+        app:layout_constraintTop_toBottomOf="@+id/edicao_edittext_data" />
 
     <Spinner
         android:id="@+id/edicao_spinner_categoria"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/cadastro_edittext_descricao"
+        app:layout_constraintEnd_toEndOf="@+id/edicao_edittext_descricao"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/cadastro_edittext_descricao"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_edittext_descricao" />
+        app:layout_constraintStart_toStartOf="@+id/edicao_edittext_descricao"
+        app:layout_constraintTop_toBottomOf="@+id/edicao_edittext_descricao" />
 
     <Button
         android:id="@+id/edicao_button_salvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/cadastro_spinner_categoria"
-        app:layout_constraintStart_toStartOf="@+id/cadastro_spinner_categoria"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_spinner_categoria" />
+        android:text="@string/btn_salvar"
+        app:layout_constraintEnd_toEndOf="@+id/edicao_spinner_categoria"
+        app:layout_constraintStart_toStartOf="@+id/edicao_spinner_categoria"
+        app:layout_constraintTop_toBottomOf="@+id/edicao_spinner_categoria" />
 </android.support.constraint.ConstraintLayout>
