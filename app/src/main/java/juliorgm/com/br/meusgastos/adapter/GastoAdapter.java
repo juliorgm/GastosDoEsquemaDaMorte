@@ -60,6 +60,7 @@ public class GastoAdapter extends BaseAdapter {
         textValor.setText(gasto.getValorToString());
         textData.setText(gasto.getData());
         textDescricao.setText(gasto.getDescricao());
+        imageViewCategoria.setImageResource(selecionaImagemCategoria(gasto.getCategoria()));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,5 +97,21 @@ public class GastoAdapter extends BaseAdapter {
         });
 
         return view;
+    }
+
+    private int selecionaImagemCategoria(String categoria) {
+        if (categoria.equals("Alimentação"))
+
+        else if (categoria.equals("Transporte"))
+            return R.drawable.ic_alimentacao;//colocar depois
+        else if (categoria.equals("Pessoais"))
+            return R.drawable.ic_pessoal;
+        else if (categoria.equals("Moradia"))
+            return R.drawable.ic_moradia;
+        else if (categoria.equals("Saúde"))
+            return R.drawable.ic_saude; //colocar icode para saude
+        else
+            return R.drawable.ic_lazer;
+
     }
 }

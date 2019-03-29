@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listViewGastos;
     private FloatingActionButton fabAdicionarGasto;
-    private TextView textSomaTotal;
+    private TextView textSomaTotal, textPrimeiroGasto;
     private GastoDAO dao;
 
     @Override
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         listViewGastos = findViewById(R.id.listview_gastos);
         fabAdicionarGasto = findViewById(R.id.fab_cadastrar_gasto);
         textSomaTotal = findViewById(R.id.textSomaTotal);
+        textPrimeiroGasto = findViewById(R.id.textPrimeiroGasto);
 
         dao = new GastoDAO(this);
 
@@ -50,17 +51,19 @@ public class MainActivity extends AppCompatActivity {
         List<Gasto> listaDeGastos = dao.listarTodosOsGastos();
         double totalDeGastos = dao.getValorTotalDeGastos();
 
-        GastoAdapter adapter = new GastoAdapter(this,listaDeGastos);
-        listViewGastos.setAdapter(adapter);
+        if(listaDeGastos.size() != 0){
+            GastoAdapter adapter = new GastoAdapter(this,listaDeGastos);
+            listViewGastos.setAdapter(adapter);
 
-        listViewGastos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Util.messagem(MainActivity.this, "teste");
-            }
-        });
+            listViewGastos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Util.messagem(MainActivity.this, "teste");
+                }
+            });
 
-        atualizaTotal();
+            atualizaTotal();
+        }
     }
 
     private void atualizaTotal(){
